@@ -6,6 +6,9 @@ __pycache__/
 # C extensions
 *.so
 
+# Ignorar notebooks de desenvolvimento e teste local
+notebooks/
+
 # Distribution / packaging
 .Python
 build/
