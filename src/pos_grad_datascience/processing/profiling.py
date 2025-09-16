@@ -34,7 +34,7 @@ import numpy as np
 import functools
 from typing import List, Set, Optional
 
-from pos_grad_datascience.core.decorators import validate_dataframe_input
+from pos_grad_datascience.core.decorators import validate_dataframe
 
 
 DEFAULT_NULL_PLACEHOLDERS: Set[str] = {

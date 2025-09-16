@@ -44,7 +44,7 @@ import re
 import numpy as np
 import pandas as pd
 
-from pos_grad_datascience.core.decorators import validate_dataframe_input
+from pos_grad_datascience.core.decorators import validate_dataframe
 
 DEFAULT_NULL_PLACEHOLDERS: Set[str] = {
     '?', ' ?', 'NULL', '', ' ', 'NA', 'N/A', 'NaN', 'nan', 'None'
@@ -264,7 +264,7 @@ def apply_drop_duplicates(df: pd.DataFrame, subset: Optional[List[str]] = None, 
     logging.info(f"{duplicate_count} linhas duplicadas foram removidas.")
     return df_deduplicated, report_df
 
-@validate_dataframe_
+@validate_dataframe
 def apply_strip_strings(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
     """Remove espaços em branco do início e fim de colunas de texto.
 
