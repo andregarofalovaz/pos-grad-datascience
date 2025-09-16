@@ -41,7 +41,7 @@ DEFAULT_NULL_PLACEHOLDERS: Set[str] = {
     '?', 'NULL', '', ' ', 'NA', 'N/A', 'NaN', 'nan', 'None'
 }
 
-@validate_dataframe_input
+@validate_dataframe
 def create_global_report(df: pd.DataFrame) -> pd.DataFrame:
     """Gera um relatório global com métricas sobre um DataFrame.
 
@@ -97,7 +97,7 @@ def create_global_report(df: pd.DataFrame) -> pd.DataFrame:
     # Retorna o DataFrame final contendo apenas as colunas de exibição
     return final_df[['MÉTRICA', 'VALOR']]
 
-@validate_dataframe_input
+@validate_dataframe
 def create_column_report(df: pd.DataFrame) -> pd.DataFrame:
     """Gera um relatório estatístico detalhado para cada coluna de um DataFrame.
 
@@ -145,7 +145,7 @@ def create_column_report(df: pd.DataFrame) -> pd.DataFrame:
     # Finaliza e retorna o relatório
     return report.reset_index().rename(columns={'index': 'COLUNA'})
 
-@validate_dataframe_input
+@validate_dataframe
 def create_unique_values_report(
     df: pd.DataFrame,
     column_types: List[str],
@@ -261,7 +261,7 @@ def _get_optimal_numeric_type(col: pd.Series) -> str:
     
     return str(col.dtype)
 
-@validate_dataframe_input
+@validate_dataframe
 def create_numerical_report(df: pd.DataFrame) -> pd.DataFrame:
     """Gera um relatório de diagnóstico físico e de qualidade para colunas numéricas.
 

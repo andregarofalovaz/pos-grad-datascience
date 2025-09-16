@@ -51,7 +51,7 @@ DEFAULT_NULL_PLACEHOLDERS: Set[str] = {
 }
 
 
-@validate_dataframe_input
+@validate_dataframe
 def apply_rename(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
     """Padroniza os nomes das colunas de um DataFrame para o formato UPPER_SNAKE_CASE.
 
@@ -74,9 +74,6 @@ def apply_rename(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
     Raises:
         TypeError: Se o objeto de entrada não for um pandas DataFrame.
     """
-    if not isinstance(df, pd.DataFrame):
-        raise TypeError("O objeto de entrada deve ser um pandas DataFrame.")
-
     df_renamed = df.copy()
     original_names = df.columns.tolist()
     
@@ -103,7 +100,7 @@ def apply_rename(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
     logging.info(f"{len(report_df)} colunas foram renomeadas para o padrão UPPER_SNAKE_CASE.")
     return df_renamed, report_df
 
-@validate_dataframe_input
+@validate_dataframe
 def apply_standardize_nulls(df: pd.DataFrame, null_placeholders: List[str] = None) -> Tuple[pd.DataFrame, pd.DataFrame]:
     """Padroniza valores nulos ocultos (placeholders) para o formato np.nan.
 
@@ -121,9 +118,6 @@ def apply_standardize_nulls(df: pd.DataFrame, null_placeholders: List[str] = Non
     Returns:
         Tuple[pd.DataFrame, pd.DataFrame]: DataFrame com nulos padronizados e relatório.
     """
-    if not isinstance(df, pd.DataFrame):
-        raise TypeError("O objeto de entrada deve ser um pandas DataFrame.")
-
     final_placeholders = DEFAULT_NULL_PLACEHOLDERS.copy()
     if null_placeholders:
         final_placeholders.update(null_placeholders)
@@ -146,7 +140,7 @@ def apply_standardize_nulls(df: pd.DataFrame, null_placeholders: List[str] = Non
     logging.info("Padronização de nulos concluída.")
     return df_standardized, report_df
 
-@validate_dataframe_input
+@validate_dataframe
 def apply_data_types(df: pd.DataFrame, type_mapping: Dict[str, str]) -> Tuple[pd.DataFrame, pd.DataFrame]:
     """Aplica tipos de dados especificados a colunas e gera um relatório completo.
 
@@ -167,9 +161,6 @@ def apply_data_types(df: pd.DataFrame, type_mapping: Dict[str, str]) -> Tuple[pd
     Raises:
         TypeError: Se o objeto de entrada não for um pandas DataFrame.
     """
-    if not isinstance(df, pd.DataFrame):
-        raise TypeError("O objeto de entrada deve ser um pandas DataFrame.")
-
     df_typed = df.copy()
     report_data = []
     
@@ -213,7 +204,7 @@ def apply_data_types(df: pd.DataFrame, type_mapping: Dict[str, str]) -> Tuple[pd
     
     return df_typed, report_df
 
-@validate_dataframe_input
+@validate_dataframe
 def apply_drop_duplicates(df: pd.DataFrame, subset: Optional[List[str]] = None, keep: str = 'first') -> Tuple[pd.DataFrame, pd.DataFrame]:
     """Remove linhas duplicadas de um DataFrame e gera um relatório da operação.
 
@@ -241,8 +232,6 @@ def apply_drop_duplicates(df: pd.DataFrame, subset: Optional[List[str]] = None, 
         TypeError: Se o objeto de entrada não for um pandas DataFrame.
         ValueError: Se o valor de 'keep' for inválido.
     """
-    if not isinstance(df, pd.DataFrame):
-        raise TypeError("O objeto de entrada deve ser um pandas DataFrame.")
     if keep not in ['first', 'last', False]:
         raise ValueError("O parâmetro 'keep' deve ser 'first', 'last' ou False.")
 
@@ -275,7 +264,7 @@ def apply_drop_duplicates(df: pd.DataFrame, subset: Optional[List[str]] = None, 
     logging.info(f"{duplicate_count} linhas duplicadas foram removidas.")
     return df_deduplicated, report_df
 
-@validate_dataframe_input
+@validate_dataframe_
 def apply_strip_strings(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
     """Remove espaços em branco do início e fim de colunas de texto.
 
@@ -294,9 +283,6 @@ def apply_strip_strings(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
     Raises:
         TypeError: Se o objeto de entrada não for um pandas DataFrame.
     """
-    if not isinstance(df, pd.DataFrame):
-        raise TypeError("O objeto de entrada deve ser um pandas DataFrame.")
-
     df_stripped = df.copy()
     report_data = []
     
@@ -330,7 +316,7 @@ def apply_strip_strings(df: pd.DataFrame) -> Tuple[pd.DataFrame, pd.DataFrame]:
     
     return df_stripped, report_df
 
-@validate_dataframe_input
+@validate_dataframe
 def apply_select_columns(df: pd.DataFrame, columns_to_keep: Optional[List[str]] = None, columns_to_drop: Optional[List[str]] = None) -> Tuple[pd.DataFrame, pd.DataFrame]:
     """Seleciona ou remove colunas de um DataFrame e gera um relatório.
 
@@ -354,8 +340,6 @@ def apply_select_columns(df: pd.DataFrame, columns_to_keep: Optional[List[str]] 
         TypeError: Se o objeto de entrada não for um pandas DataFrame.
         ValueError: Se ambos ou nenhum dos parâmetros de seleção for fornecido.
     """
-    if not isinstance(df, pd.DataFrame):
-        raise TypeError("O objeto de entrada deve ser um pandas DataFrame.")
     if (columns_to_keep is None) == (columns_to_drop is None):
         raise ValueError("Exatamente um dos parâmetros 'columns_to_keep' ou 'columns_to_drop' deve ser fornecido.")
 
@@ -386,7 +370,7 @@ def apply_select_columns(df: pd.DataFrame, columns_to_keep: Optional[List[str]] 
     logging.info(f"{len(cols_dropped)} colunas foram removidas.")
     return df_processed, report_df
 
-@validate_dataframe_input
+@validate_dataframe
 def apply_value_mapping(df: pd.DataFrame, mapping_dict: Dict[str, Dict]) -> Tuple[pd.DataFrame, pd.DataFrame]:
     """Aplica um mapeamento de valores a colunas específicas e gera um relatório.
 
@@ -407,9 +391,6 @@ def apply_value_mapping(df: pd.DataFrame, mapping_dict: Dict[str, Dict]) -> Tupl
     Raises:
         TypeError: Se o objeto de entrada não for um pandas DataFrame.
     """
-    if not isinstance(df, pd.DataFrame):
-        raise TypeError("O objeto de entrada deve ser um pandas DataFrame.")
-
     df_mapped = df.copy()
     report_data = []
     logging.info("Iniciando mapeamento de valores para %d colunas.", len(mapping_dict))
