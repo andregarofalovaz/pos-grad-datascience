@@ -44,7 +44,7 @@ import re
 import numpy as np
 import pandas as pd
 
-from pos_grad_datascience.core.decorators import validate_dataframe
+from pos_grad_datascience.core.decorators import validate_dataframe_input
 
 DEFAULT_NULL_PLACEHOLDERS: Set[str] = {
     '?', ' ?', 'NULL', '', ' ', 'NA', 'N/A', 'NaN', 'nan', 'None'
