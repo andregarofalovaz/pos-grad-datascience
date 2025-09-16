@@ -29,29 +29,17 @@ create_numerical_report:
 
 """
 
-
-
-
-
-
 import pandas as pd
 import numpy as np
 import functools
 from typing import List, Set, Optional
 
+from pos_grad_datascience.core.decorators import validate_dataframe
+
 
 DEFAULT_NULL_PLACEHOLDERS: Set[str] = {
     '?', 'NULL', '', ' ', 'NA', 'N/A', 'NaN', 'nan', 'None'
 }
-
-def validate_dataframe_input(func):
-    """Decorator que valida se o primeiro argumento da função é um DataFrame."""
-    @functools.wraps(func)
-    def wrapper(df, *args, **kwargs):
-        if not isinstance(df, pd.DataFrame):
-            raise TypeError("O objeto de entrada deve ser um pandas DataFrame.")
-        return func(df, *args, **kwargs)
-    return wrapper
 
 @validate_dataframe_input
 def create_global_report(df: pd.DataFrame) -> pd.DataFrame:
