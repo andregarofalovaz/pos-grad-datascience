@@ -98,7 +98,7 @@ def create_global_report(df: pd.DataFrame) -> pd.DataFrame:
     return final_df[['MÉTRICA', 'VALOR']]
 
 @validate_dataframe
-def create_column_report(df: pd.DataFrame) -> pd.DataFrame:
+def create_column_report(df: pd.DataFrame, num_exemplos: int = 3) -> pd.DataFrame:
     """Gera um relatório estatístico detalhado para cada coluna de um DataFrame.
 
     Esta função analisa um DataFrame e produz um relatório de profiling, onde
@@ -117,7 +117,8 @@ def create_column_report(df: pd.DataFrame) -> pd.DataFrame:
             - %_NULOS: O percentual de valores nulos;
             - QTD_VALORES_UNICOS: A quantidade de valores únicos (cardinalidade);
             - %_VALORES_UNICOS: O percentual de valores únicos;
-            - USO_MEMORIA_KB: O uso de memória da coluna em KB.
+            - USO_MEMORIA_KB: O uso de memória da coluna em KB;
+            - EXEMPLO_VALORES: Uma lista com exemplos de valores únicos.
 
     Raises:
         TypeError: Se o objeto de entrada não for um pandas DataFrame.
@@ -134,7 +135,8 @@ def create_column_report(df: pd.DataFrame) -> pd.DataFrame:
         '%_NULOS': df.isnull().mean() * 100,
         'QTD_VALORES_UNICOS': df.nunique(),
         '%_VALORES_UNICOS': (df.nunique() / len(df)) * 100 if len(df) > 0 else 0,
-        'USO_MEMORIA_KB': memory_usage_kb
+        'USO_MEMORIA_KB': memory_usage_kb,
+        'EXEMPLO_VALORES': df.apply(lambda col: list(col.dropna().unique()[:num_exemplos])) # ADICIONADO
     })
     
     # Formata as colunas para apresentação final
@@ -144,7 +146,7 @@ def create_column_report(df: pd.DataFrame) -> pd.DataFrame:
 
     # Finaliza e retorna o relatório
     return report.reset_index().rename(columns={'index': 'COLUNA'})
-
+ 
 @validate_dataframe
 def create_unique_values_report(
     df: pd.DataFrame,
