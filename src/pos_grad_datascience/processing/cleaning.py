@@ -188,7 +188,10 @@ def apply_data_types(df: pd.DataFrame, type_mapping: Dict[str, str]) -> Tuple[pd
                 result_entry["STATUS"] = "Não Alterado (Tipo já era o correto)"
             else:
                 try:
-                    df_typed[column] = df_typed[column].astype(new_type)
+                    if new_type == 'datetime':
+                        df_typed[column] = pd.to_datetime(df_typed[column], format='%d-%m-%Y')
+                    else:
+                        df_typed[column] = df_typed[column].astype(new_type)
                     result_entry["STATUS"] = "Sucesso"
                 except Exception as e:
                     result_entry["STATUS"] = "Falha na Conversão"
