@@ -136,7 +136,7 @@ def create_column_report(df: pd.DataFrame, num_exemplos: int = 3) -> pd.DataFram
         'QTD_VALORES_UNICOS': df.nunique(),
         '%_VALORES_UNICOS': (df.nunique() / len(df)) * 100 if len(df) > 0 else 0,
         'USO_MEMORIA_KB': memory_usage_kb,
-        'EXEMPLO_VALORES': df.apply(lambda col: list(col.dropna().unique()[:num_exemplos])) # ADICIONADO
+        'EXEMPLO_VALORES': [list(df[col].dropna().unique()[:num_exemplos]) for col in df.columns]
     })
     
     # Formata as colunas para apresentação final
