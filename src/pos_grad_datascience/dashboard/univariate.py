@@ -180,7 +180,7 @@ class UnivariateDashboard:
         fig = plt.figure(figsize=(6.8, 4.2))
         ax = fig.add_subplot(1, 1, 1)
 
-        # 2. Lógica de plotagem (permanece a mesma)
+        # 2. Lógica de plotagem
         counts = self.data[column].value_counts()
         top_n = 10
         if len(counts) > top_n:
@@ -194,25 +194,18 @@ class UnivariateDashboard:
         ax.set_title(f'Contagem de Categorias para {column}', fontsize=14, pad=15)
         ax.set_xlabel('Categorias', fontsize=11)
         ax.set_ylabel('Contagem', fontsize=11)
-        for i, v in enumerate(plot_data.values):
-            ax.text(i, v + (plot_data.values.max() * 0.01), f'{int(v):,}', color='black', ha='center', fontsize=9)
+        # for i, v in enumerate(plot_data.values):
+        #     ax.text(i, v + (plot_data.values.max() * 0.01), f'{int(v):,}', color='black', ha='center', fontsize=9)
         plt.xticks(rotation=40, ha='right')
         sns.despine(left=True, bottom=True)
         plt.tight_layout()
 
-        # 3. Processo de renderização em memória (A MUDANÇA PRINCIPAL)
+        # 3. Processo de renderização em memória
         buf = io.BytesIO()
-        # Salva a figura no buffer, cortando todas as margens extras
         fig.savefig(buf, format='png', bbox_inches='tight', pad_inches=0.05)
         buf.seek(0)
-        
-        # Cria um widget de imagem com os dados do buffer
         image_widget = widgets.Image(value=buf.read(), format='png')
-        
-        # Limpa a figura da memória para evitar que ela seja exibida duas vezes
         plt.close(fig)
-        
-        # 4. Retorna o widget de imagem em vez de chamar plt.show()
         return image_widget
 
 
