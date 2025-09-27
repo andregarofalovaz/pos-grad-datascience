@@ -33,21 +33,3 @@ A solução final, baseada em um modelo LightGBM otimizado, alcançou as seguint
 | **Capacidade de Generalização** | **+0.92%** |
 
 A variação de performance de apenas +0.92% entre a validação cruzada e o conjunto de teste final confirma a capacidade de generalização do modelo.
-
-
-## 4. Como Executar
-#### Requisitos
-- Python 3.10+
-- Bibliotecas principais: `pandas`, `scikit-learn`, `lightgbm`, `catboost`, `optuna`, `shap`.
-
-#### Instruções
-1.  Clone este repositório:
-    ```bash
-    git clone [https://github.com/andregarofalovaz/pos-grad-datascience.git](https://github.com/andregarofalovaz/pos-grad-datascience.git)
-    ```
-2.  Abra o notebook `Análise Preditiva de Tempo de Entrega em Delivery.ipynb` em um ambiente Jupyter;
-
-3.  Configure o modo de execução na segunda célula de código:
-    - **Modo Rápido (Padrão):** Mantenha a variável `EXECUTAR_MODELAGEM_COMPLETA = False`. O notebook executará em poucos minutos, carregando os resultados pré-calculados da pasta `artifacts/` a partir do GitHub.
-    - **Modo Completo:** Altere a variável para `EXECUTAR_MODELAGEM_COMPLETA = True` para executar todo o processo de treinamento e otimização do zero.
-
