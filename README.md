@@ -3,7 +3,6 @@
 ## 1. Contexto do Problema
 Este projeto aborda o desafio de prever com precisão o tempo de entrega em um serviço de delivery, um fator essencial para a satisfação do cliente e a eficiência logística. O objetivo é construir um modelo de machine learning a partir de dados operacionais, como informações do entregador, trânsito e características do pedido, para fornecer estimativas de tempo mais confiáveis.
 
----
 
 ## 2. Metodologia
 O desenvolvimento seguiu um pipeline estruturado de ciência de dados nas seguintes etapas:
@@ -22,9 +21,8 @@ O desenvolvimento seguiu um pipeline estruturado de ciência de dados nas seguin
   7. Interpretação dos Resultados: uso de Feature Importance e SHAP para uma compreensão global e local do comportamento do modelo;
   
   8. Conclusão: consolidação de todos os resultados, com a apresentação da performance final, avaliação de fatores preditivos, limitações do modelo e oportunidades de melhoria.
-  
-  ---
 
+  
 ## 3. Resultados
 A solução final, baseada em um modelo LightGBM otimizado, alcançou as seguintes métricas de performance no conjunto de teste:
 
@@ -36,7 +34,6 @@ A solução final, baseada em um modelo LightGBM otimizado, alcançou as seguint
 
 A variação de performance de apenas +0.92% entre a validação cruzada e o conjunto de teste final confirma a capacidade de generalização do modelo.
 
----
 
 ## 4. Como Executar
 #### Requisitos
