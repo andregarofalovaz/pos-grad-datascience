@@ -1,5 +1,8 @@
 # Análise Preditiva de Tempo de Entrega em Delivery
 
+## Link para notebook
+O arquivo pode ser acessado em: https://colab.research.google.com/drive/1jKCI9omMejRsXhn7hWnA7nqIrw62H7yw?usp=sharing
+
 ## 1. Contexto do Problema
 Este projeto aborda o desafio de prever com precisão o tempo de entrega em um serviço de delivery, um fator essencial para a satisfação do cliente e a eficiência logística. O objetivo é construir um modelo de machine learning a partir de dados operacionais, como informações do entregador, trânsito e características do pedido, para fornecer estimativas de tempo mais confiáveis.
 
