@@ -1,0 +1,3 @@
+from .univariate import (
+    UnivariateDashboard
+)
